@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Getting Data From a Server | COMP1073 Client-Side JavaScript</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="css/normalize.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+	<h1>Getting Data From a Server</h1>
+	<form>
+		<label for="verse-choose">Choose a very cool verse</label>
+		<select id="verse-choose" name="verse-choose">
+			<option value="verse1" selected>Verse 1</option>
+			<option value="verse2">Verse 2</option>
+			<option value="verse3">Verse 3</option>
+			<option value="verse4">Verse 4</option>
+		</select>
+	</form>
+
+	<h2>The Conqueror Worm, <em>Edgar Allen Poe, 1843</em></h2>
+
+	<pre>
+
+	</pre>
+	<script>
+		// STEP 1: Grab the HTML elements we need for the interaction
+		var verseChoose = document.querySelector('select');
+		var poemDisplay = document.querySelector('pre');
+
+		// STEP 2: Build out the event handler for the SELECT element
+		verseChoose.onchange = function() {
+			var verse = verseChoose.value;
+			updateDisplay(verse);
+		};
+
+		// STEP 3: Construct updateDisplay() function
+		function updateDisplay(verse) {
+			var url = verse + '.txt';
+			// STEP 4: Put together XHR
+			// var request = new XMLHttpRequest();
+			// request.open('GET', url);
+			// request.responseType = 'text';
+			// request.onload = function() {
+			// 	poemDisplay.textContent = request.response;
+			// };
+			// request.send();
+			// STEP 6: Comment out above XHR and replace with fetch() and promises
+			fetch(url).then(function(response) {
+				response.text().then(function(text) {
+					poemDisplay.textContent = text;
+				});
+			});
+		}
+		// STEP 5: Initialize the app with Verse 1
+		updateDisplay('verse1');
+		verseChoose.value = 'verse1';
+
+		// This page inspired by and adapted from https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data
+
+		</script>
+	</body>
+</html>

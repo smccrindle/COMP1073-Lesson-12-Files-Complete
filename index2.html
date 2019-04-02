@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Third Party APIs | COMP1073 Client-Side JavaScript</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="css/normalize.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+	<h1>Customized maps example</h1>
+	<div id="map_canvas"></div>
+	<!-- STEP 1: Obtain your very own Google Maps API (https://console.cloud.google.com/apis/dashboard) -->
+	<!--
+	<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=INSERT-YOUR-API-KEY-HERE"></script>
+	<script>
+	-->
+	<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyD69WA4bvBF5fswfOl4MMFFQkmtxEXkLTc"></script>
+	<script>
+
+		if("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+				var myOptions = {
+					zoom: 8,
+					center: latlng,
+					mapTypeId: google.maps.MapTypeId.TERRAIN,
+					// STEP 4: Changing the UI controls on the map
+					disableDefaultUI: true,
+					zoomControl: true,
+					mapTypeControl: true,
+					scaleControl: true
+				}
+				var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+				// STEP 3a: Build out a custom pop-up - start with a string of HTML
+				var contentString = '<div id="content"><h2 id="firstHeading" class="firstHeading">Custom info window</h2><p>This is a cool custom info window.</p></div>';
+				// STEP 3b: Create a new window info object
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+				// STEP 2: Add a custom marker to the Google Map - visit https://fusiontables.google.com/DataSource?dsrcid=308519#map:id=3 and change the icon to one of your choosing
+				var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+				var marker = new google.maps.Marker({
+					position: latlng,
+					icon: iconBase + 'placemark_circle_highlight.png',
+					map: map
+				});
+
+				// STEP 3c: Add an event listener to launch the pop-up when your new marker is clicked
+				marker.addListener('click', function() {
+						infowindow.open(map, marker);
+				});
+			});
+		} else {
+			var para = document.createElement('p');
+			para.textContent = 'Argh, no geolocation!';
+			document.body.appendChild(para);
+		}
+		// STEP 5: Try it out!
+
+		// This page inspired by and adapted from https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Third_party_APIs
+	</script>
+</body>
+</html>
