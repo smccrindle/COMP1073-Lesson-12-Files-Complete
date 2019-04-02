@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Getting Data From a Server | COMP1073 Client-Side JavaScript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/normalize.css" rel="stylesheet" />
     <style>
+      html {
+        font-family: sans-serif;
+      }
       #map {
         width: 600px;
         height: 600px;
@@ -14,30 +19,29 @@
     <!-- STEP 2: Also, add the CSS that goes along with it, also served up from their CDN (https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css) -->
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
     <script>
-      // STEP X: Create a variable to contain a map layer
+      // STEP 3: Create a variable to contain a map layer (use 'L')
       var L;
-      // STEP X: Build a DOM loaded event listener (using an ES6 fat arrow for the anonymous function)
+      // STEP 4: Build a DOM loaded event listener (using an ECMAScript fat arrow for the anonymous function)
       window.addEventListener('load', (event) => {
-      // STEP X: Get an API key from MapQuest
-      // STEP X: Add the mapquest.key property to the above var 'L'
+      // STEP 5a: Get an API key from MapQuest
+      // STEP 5b: Add the mapquest.key property to var 'L'
         L.mapquest.key = '287m4hIp1aLjxL4cGIxXgZU4Ms8hT8If';
-        // STEP X: Create a var for the actual map, using the map method, and pointing to the id="map" in the DOM...
-        // 'map' refers to a <div> element with the ID map
+        // STEP 6a: Create a var representing the actual map, using the mapquest.map method - the first parameter is the ID of the HTML element to contain the map
         var map = L.mapquest.map('map', {
           center: [44.414809, -79.667755],
           layers: L.mapquest.tileLayer('map'),
           zoom: 13
         });
-        // STEP X: The second parameter of the above method accepts an object - let's set the center, layers, and zoom levels
-        // STEP Xa: Get the lat/lng for your address at https://developer.mapquest.com/documentation/tools/latitude-longitude-finder/
-        // STEP Xb: Add the map tileLayer (raster map image tiles), and test the map out in the browser...
-        // STEP Xc: Set the initial zoom level in the above object (1-18)
+        // STEP 7: The second parameter of the above method accepts an object - let's set the center, layers, and zoom levels
+        // STEP 7a: Get the lat/lng for your address at https://developer.mapquest.com/documentation/tools/latitude-longitude-finder/
+        // STEP 7b: Add the map tileLayer (raster map image tiles), and test the map out in the browser...
+        // STEP 7c: Set the initial zoom level in the above object (1-18)
 
-        // STEP X: Add the traffic layer
+        // STEP 8: Add the traffic layer
         map.addLayer(L.mapquest.trafficLayer());
-        // STEP X: Add the incidents layer
+        // STEP 9: Add the incidents layer
         map.addLayer(L.mapquest.incidentsLayer());
-        // STEP X: Add a custom marker to the map
+        // STEP 10: Add a custom marker to the map
         L.mapquest.textMarker([44.414809, -79.667755], {
           text: 'Georgian College',
           subtext: 'of Applied Arts and Technology',
@@ -50,18 +54,16 @@
           }
         }).addTo(map);
 
-
-
         // Learn more about this API at https://developer.mapquest.com/documentation/mapquest-js/
       });
 
       // This example adapted from "Third-party APIs" at https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Third_party_APIs
+      
       // A special thanks to MapQuest for the use of their great API - https://developer.mapquest.com/documentation/
     </script>
   </head>
   <body>
-    <h1>Simple Mapquest example</h1>
-
+    <h1>Using the MapQuest API</h1>
     <div id="map"></div>
   </body>
 </html>
