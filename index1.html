@@ -26,11 +26,12 @@
         var map = L.mapquest.map('map', {
           center: [44.414809, -79.667755],
           layers: L.mapquest.tileLayer('map'),
-          zoom: 12
+          zoom: 5
         });
         // STEP X: The second parameter of the above method accepts an object - let's set the center, layers, and zoom levels
         // STEP Xa: Get the lat/lng for your address at https://developer.mapquest.com/documentation/tools/latitude-longitude-finder/
-        // STEP Xb: Add the map tileLayer, and test the map out in the browser...
+        // STEP Xb: Add the map tileLayer (raster map image tiles), and test the map out in the browser...
+        // STEP Xc: Set the initial zoom level ()
       });
 
       // This example adapted from "Third-party APIs" at https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Third_party_APIs
